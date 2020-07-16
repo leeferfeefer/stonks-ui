@@ -6,15 +6,19 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "axios": "^0.19.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "yarn wiremock && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "wiremock": "yarn wiremock-stop && yarn wiremock-start",
+    "wiremock-start": "cd wiremock; java -jar wiremock.jar --port=4300 --root-dir=./ &",
+    "wiremock-stop": "lsof -ti tcp:4300 | xargs kill -9 || true"
   },
   "eslintConfig": {
     "extends": "react-app"

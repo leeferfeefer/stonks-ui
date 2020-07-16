@@ -1,0 +1,9 @@
+{
+    "request" : {
+      "url" : "/favicon.ico",
+      "method" : "GET"    
+    },
+    "response" : {
+      "status" : 200
+    }
+  }

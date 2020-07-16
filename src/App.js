@@ -1,8 +1,16 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import StockSymbolsService from "./service/StockSymbols.service";
 
 function App() {
+
+  StockSymbolsService.getStockSymbols().then(symbols => {
+    console.log("symbols: ", symbols);
+  }).catch(error => {
+    console.log("error", error)
+  });
+
   return (
     <div className="App">
       <header className="App-header">
@@ -16,7 +24,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          Learn React        
         </a>
       </header>
     </div>
