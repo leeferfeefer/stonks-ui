@@ -2,13 +2,12 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import StockSymbolsService from "./service/StockSymbols.service";
+import CompanyProfileService from "./service/CompanyProfile.service";
 
 function App() {
 
-  StockSymbolsService.getStockSymbols().then(symbols => {
-    console.log("symbols: ", symbols);
-  }).catch(error => {
-    console.log("error", error)
+  CompanyProfileService.getCompanyProfile().then(profile => {
+    console.log("profile", profile);
   });
 
   return (

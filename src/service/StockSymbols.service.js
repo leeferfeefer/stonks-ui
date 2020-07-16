@@ -10,7 +10,7 @@ export default class StockSymbolsService {
     
             const stockSymbols = [];
             for (let symbol of symbols) {
-                const stockSymbol = new StockSymbol(symbol.description, symbol.displaySymbol, symbol.symbol)
+                const stockSymbol = StockSymbol.fromJSON(symbol);
                 stockSymbols.push(stockSymbol);
             }    
             return stockSymbols;

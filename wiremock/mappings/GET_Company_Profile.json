@@ -1,0 +1,28 @@
+{
+    "priority": 1,
+    "request": {
+        "method": "GET",
+        "urlPath": "/company/profile"
+    },
+    "response": {
+        "status": 200,
+        "headers" : {
+            "Access-Control-Allow-Origin" : "*"
+        },
+        "fixedDelayMilliseconds": 0,
+        "jsonBody": {
+            "country": "US",
+            "currency": "USD",
+            "exchange": "NEW YORK STOCK EXCHANGE, INC.",
+            "finnhub_industry": "Retail",
+            "ipo": "Thu, 19 Apr 1984 00:00:00 GMT",
+            "logo": "https://static.finnhub.io/logo/f3d21b34-80eb-11ea-9fb5-00000000092a.png",
+            "market_capitalization": 277259.0,
+            "name": "Home Depot Inc",
+            "phone": "17704338211",
+            "share_outstanding": 1075.522865,
+            "ticker": "HD",
+            "weburl": "https://www.homedepot.com/"
+        }
+    }
+}
