@@ -1,32 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useEffect, useState} from 'react';
 import './App.css';
+import StockList from "./components/StockList";
 import StockSymbolsService from "./service/StockSymbols.service";
-import CompanyProfileService from "./service/CompanyProfile.service";
 
 function App() {
+  const [stockSymbols, setStockSymbols] = useState([]);
 
-  CompanyProfileService.getCompanyProfile().then(profile => {
-    console.log("profile", profile);
-  });
+  // runs both after the first render and after every update.
+  useEffect(() => {
+    StockSymbolsService.getStockSymbols().then(stockSymbols => {
+      console.log("stockSymbols", stockSymbols)
+      setStockSymbols(stockSymbols);
+    });
+  }, []); // pass [] so that it doesnt re-render after getting stock symbols and setting state
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React        
-        </a>
-      </header>
-    </div>
+    <StockList symbols={stockSymbols}/>
   );
 }
 

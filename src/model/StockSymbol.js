@@ -7,6 +7,6 @@ export default class StockSymbol {
     }
 
     static fromJSON = (json) => {
-        return new StockSymbol(json.description, json.displaySymbol, json.symbol);
+        return new StockSymbol(json.description, json.display_symbol, json.symbol);
     }
 }
