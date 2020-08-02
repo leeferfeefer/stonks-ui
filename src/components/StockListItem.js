@@ -9,6 +9,8 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import List from '@material-ui/core/List';
 import CompanyProfileService from '../service/CompanyProfile.service';
+import Checkbox from '@material-ui/core/Checkbox';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -35,14 +37,21 @@ export default function StockListItem(props) {
         setIsSelected(!isSelected);
     };
 
+    const handleCheckBoxChange = () => {
+
+    };
+
     return (
         <>
-            <ListItem button onClick={handleClick}>
-                {/* <ListItemIcon>
-                    <InboxIcon />
-                </ListItemIcon> */}
+            <ListItem button dense onClick={handleClick}>            
                 <ListItemText primary={`${symbol.symbol} - ${symbol.description}`} />
                 {isSelected ? <ExpandLess /> : <ExpandMore />}
+                <ListItemSecondaryAction>
+                    <Checkbox
+                        edge="end"
+                        onChange={handleCheckBoxChange}
+                    />
+                </ListItemSecondaryAction>
             </ListItem>
             <Collapse in={isSelected} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
