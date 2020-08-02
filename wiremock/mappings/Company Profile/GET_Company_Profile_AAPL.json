@@ -1,0 +1,33 @@
+{
+    "priority": 1,
+    "request": {
+        "method": "GET",
+        "urlPath": "/company/profile",
+        "queryParameters" : {
+            "stockSymbol" : {
+              "equalTo" : "AAPL"
+            }
+        }
+    },
+    "response": {
+        "status": 200,
+        "headers" : {
+            "Access-Control-Allow-Origin" : "*"
+        },
+        "fixedDelayMilliseconds": 0,
+        "jsonBody": {
+            "country": "US",
+            "currency": "USD",
+            "exchange": "NASDAQ NMS - GLOBAL MARKET",
+            "finnhub_industry": "Technology",
+            "ipo": "Fri, 12 Dec 1980 00:00:00 GMT",
+            "logo": "https://static.finnhub.io/logo/87cb30d8-80df-11ea-8951-00000000092a.png",
+            "market_capitalization": 1667679.0,
+            "name": "Apple Inc",
+            "phone": "14089961010",
+            "share_outstanding": 4334.335,
+            "ticker": "AAPL",
+            "weburl": "https://www.apple.com/"
+        }
+    }
+}

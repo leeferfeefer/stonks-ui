@@ -8,10 +8,11 @@ function App() {
 
   // runs both after the first render and after every update.
   useEffect(() => {
-    StockSymbolsService.getStockSymbols().then(stockSymbols => {
-      console.log("stockSymbols", stockSymbols)
+    const getStockSymbols = async () => {
+      const stockSymbols = await StockSymbolsService.getStockSymbols();
       setStockSymbols(stockSymbols);
-    });
+    }
+    getStockSymbols();
   }, []); // pass [] so that it doesnt re-render after getting stock symbols and setting state
 
   return (

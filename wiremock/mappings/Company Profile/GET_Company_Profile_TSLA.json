@@ -1,0 +1,33 @@
+{
+    "priority": 1,
+    "request": {
+        "method": "GET",
+        "urlPath": "/company/profile",
+        "queryParameters" : {
+            "stockSymbol" : {
+              "equalTo" : "TSLA"
+            }
+        }
+    },
+    "response": {
+        "status": 200,
+        "headers" : {
+            "Access-Control-Allow-Origin" : "*"
+        },
+        "fixedDelayMilliseconds": 0,
+        "jsonBody": {
+            "country": "US",
+            "currency": "USD",
+            "exchange": "NASDAQ NMS - GLOBAL MARKET",
+            "finnhub_industry": "Automobiles",
+            "ipo": "Tue, 29 Jun 2010 00:00:00 GMT",
+            "logo": "https://static.finnhub.io/logo/2dd96524-80c9-11ea-aaac-00000000092a.png",
+            "market_capitalization": 266638.9,
+            "name": "Tesla Inc",
+            "phone": "16506815000",
+            "share_outstanding": 186.361726,
+            "ticker": "TSLA",
+            "weburl": "https://www.tesla.com/"
+        }
+    }
+}

@@ -7,8 +7,8 @@ import Collapse from '@material-ui/core/Collapse';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
-import StarBorder from '@material-ui/icons/StarBorder';
 import List from '@material-ui/core/List';
+import CompanyProfileService from '../service/CompanyProfile.service';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -24,29 +24,32 @@ const useStyles = makeStyles((theme) => ({
 export default function StockListItem(props) {
     const classes = useStyles();
     const [isSelected, setIsSelected] = useState(false);
+    const [companyProfile, setCompanyProfile] = useState({});
     const {symbol} = props;
 
-    console.log("symbol: ", symbol)
-    const handleClick = () => {
-        console.log("Clicked!");
+    const handleClick = async () => {
+        if (!isSelected) {
+            const companyProfile = await CompanyProfileService.getCompanyProfile(symbol.symbol);
+            setCompanyProfile(companyProfile);
+        }
         setIsSelected(!isSelected);
     };
 
     return (
         <>
             <ListItem button onClick={handleClick}>
-                <ListItemIcon>
+                {/* <ListItemIcon>
                     <InboxIcon />
-                </ListItemIcon>
+                </ListItemIcon> */}
                 <ListItemText primary={`${symbol.symbol} - ${symbol.description}`} />
                 {isSelected ? <ExpandLess /> : <ExpandMore />}
             </ListItem>
             <Collapse in={isSelected} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
-                    <ListItem button className={classes.nested}>
-                        <ListItemText primary="Starred" />
-                        <ListItemText primary="Starred" />
-                        <ListItemText primary="Starred" />
+                    <ListItem className={classes.nested}>
+                        <ListItemText primary={`${companyProfile.industry}`}/>
+                        <ListItemText primary={`${companyProfile.marketCap}`}/>
+                        <ListItemText primary={`${companyProfile.shareOutstanding}`}/>
                     </ListItem>
                 </List>
             </Collapse>

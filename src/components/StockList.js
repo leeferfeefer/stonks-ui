@@ -21,7 +21,7 @@ export default function StockList(props) {
 
     const renderRow = () => {
         return symbols ? 
-            symbols.map((symbol) => <StockListItem symbol={symbol}/>)
+            symbols.map((symbol, index) => <StockListItem key={index} symbol={symbol}/>)
             : null
     };
     return (

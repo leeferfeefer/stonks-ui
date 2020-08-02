@@ -3,12 +3,18 @@ import CompanyProfile from '../model/CompanyProfile';
 
 export default class CompanyProfileService {
 
-    static getCompanyProfile = async () => {
+    static getCompanyProfile = async (stockSymbol) => {
+        let companyProfile = {};
         try {
-            const response = await AxiosService.api.get('/company/profile');
-            return CompanyProfile.fromJSON(response.data);
+            const response = await AxiosService.api.get('/company/profile', {
+                params: {
+                    stockSymbol
+                }
+            });
+            companyProfile = CompanyProfile.fromJSON(response.data);
         } catch (error) {
             console.log("Could not get company profile: ", error);
         }
+        return companyProfile;
     };
 }

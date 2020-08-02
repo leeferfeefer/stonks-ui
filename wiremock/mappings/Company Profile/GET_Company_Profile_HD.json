@@ -2,7 +2,12 @@
     "priority": 1,
     "request": {
         "method": "GET",
-        "urlPath": "/company/profile"
+        "urlPath": "/company/profile",
+        "queryParameters" : {
+            "stockSymbol" : {
+              "equalTo" : "HD"
+            }
+        }
     },
     "response": {
         "status": 200,
