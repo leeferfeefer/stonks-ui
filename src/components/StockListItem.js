@@ -38,6 +38,8 @@ export default function StockListItem(props) {
 
     const handleCheckBoxChange = () => {
         // TODO: Save stonk in redux here
+        const {saveStonk} = props;
+        saveStonk('');
     };
 
     return (
