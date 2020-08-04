@@ -3,7 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import List from '@material-ui/core/List';
 import StockListItem from './StockListItem';
-import { saveStonk } from '../redux/actions/savedStonksActions';
+import { saveStonk, deleteStonk } from '../redux/actions/savedStonksActions';
+import { connect } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -18,11 +19,17 @@ const useStyles = makeStyles((theme) => ({
 
 function StockList(props) {
     const classes = useStyles();
-    const {symbols, saveStonk} = props;
+    const {stonks, saveStonk, deleteStonk} = props;
 
     const renderRow = () => {
-        return symbols ? 
-            symbols.map((symbol, index) => <StockListItem key={index} symbol={symbol} saveStonk={saveStonk}/>)
+        return stonks ? 
+            stonks.map((stonk, index) => 
+                <StockListItem 
+                    key={index} 
+                    stonk={stonk} 
+                    saveStonk={saveStonk}
+                    deleteStonk={deleteStonk}
+                />)
             : null
     };
     return (
@@ -49,7 +56,10 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         saveStonk: (stonk) => {
-            dispatch(saveStonk(stonk))
+            dispatch(saveStonk(stonk));
+        },
+        deleteStonk: (stonk) => {
+            dispatch(deleteStonk(stonk));
         }
     }
 }

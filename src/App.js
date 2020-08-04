@@ -19,7 +19,7 @@ function App() {
 
   return (
     <Grid container direction={'row'}>
-      <StockList symbols={stockSymbols}/>
+      <StockList stonks={stockSymbols}/>
       <WatchList/>
     </Grid>
   );

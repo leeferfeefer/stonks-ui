@@ -25,27 +25,33 @@ const useStyles = makeStyles((theme) => ({
 export default function StockListItem(props) {
     const classes = useStyles();
     const [isSelected, setIsSelected] = useState(false);
+    const [isChecked, setIsChecked] = useState(false);
     const [companyProfile, setCompanyProfile] = useState({});
-    const {symbol} = props;
+    const {stonk} = props;
 
     const handleClick = async () => {
         if (!isSelected) {
-            const companyProfile = await CompanyProfileService.getCompanyProfile(symbol.symbol);
+            const companyProfile = await CompanyProfileService.getCompanyProfile(stonk.symbol);
             setCompanyProfile(companyProfile);
         }
         setIsSelected(!isSelected);
     };
 
     const handleCheckBoxChange = () => {
-        // TODO: Save stonk in redux here
-        const {saveStonk} = props;
-        saveStonk('');
+        const {saveStonk, deleteStonk} = props;
+
+        if (!isChecked) {
+            saveStonk(stonk);
+        } else {
+            deleteStonk(stonk);
+        }
+        setIsChecked(!isChecked);
     };
 
     return (
         <>
             <ListItem button dense onClick={handleClick}>            
-                <ListItemText primary={`${symbol.symbol} - ${symbol.description}`} />
+                <ListItemText primary={`${stonk.symbol} - ${stonk.description}`} />
                 {isSelected ? <ExpandLess /> : <ExpandMore />}
                 <ListItemSecondaryAction>
                     <Checkbox
