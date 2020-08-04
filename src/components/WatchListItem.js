@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import CompanyProfileService from '../service/CompanyProfile.service';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -16,15 +17,25 @@ const useStyles = makeStyles((theme) => ({
 
 export default function WatchListItem(props) {
     const classes = useStyles();
+    const [isSelected, setIsSelected] = useState(false);
+    const [companyProfile, setCompanyProfile] = useState({});
+    const {savedStonk} = props;
 
     const handleClick = async () => {
-        console.log("clicked")
+        if (!isSelected) {
+            const companyProfile = await CompanyProfileService.getCompanyProfile(savedStonk.symbol);
+            setCompanyProfile(companyProfile);
+        }
+        setIsSelected(!isSelected);
+
+        // TODO: show graph here in a graph view
+        // See what can be done with company profile - other than that call company financials endpoint
     };
 
     return (
         <>
-            <ListItem button onClick={handleClick}>
-                <ListItemText primary={`thingy`} />
+            <ListItem button dense onClick={handleClick}>
+                <ListItemText primary={`${savedStonk.symbol} - ${savedStonk.description}`} />
             </ListItem>        
         </>
     );

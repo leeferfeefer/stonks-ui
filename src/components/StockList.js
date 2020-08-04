@@ -47,12 +47,6 @@ function StockList(props) {
     );
 }
 
-const mapStateToProps = state => {
-    return {
-        savedStonks: state.savedStonksReducer.savedStonks
-    }
-};
-
 const mapDispatchToProps = dispatch => {
     return {
         saveStonk: (stonk) => {
@@ -64,4 +58,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(StockList);
+export default connect(null, mapDispatchToProps)(StockList);
