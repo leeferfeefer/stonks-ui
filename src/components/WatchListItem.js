@@ -29,7 +29,7 @@ export default function WatchListItem(props) {
         setIsSelected(!isSelected);
 
         // TODO: show graph here in a graph view
-        // See what can be done with company profile - other than that call company financials endpoint
+        // See what can be done with company profile - other than that call company financials
     };
 
     return (
