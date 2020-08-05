@@ -44,11 +44,4 @@ function WatchList(props) {
     );
 }
 
-const mapStateToProps = state => {
-    return {
-        savedStonks: state.savedStonksReducer.savedStonks
-    }
-};
-
-
-export default connect(mapStateToProps, null)(WatchList);
+export default WatchList;
