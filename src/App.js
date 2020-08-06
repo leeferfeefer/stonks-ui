@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import './App.css';
+import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import StockList from "./components/StockList";
 import StockSymbolsService from "./service/StockSymbols.service";
@@ -7,7 +7,15 @@ import WatchList from "./components/WatchList";
 import NewsFeedList from "./components/NewsFeedList";
 import { connect } from "react-redux";
 
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1
+  }
+}));
+
 function App(props) {
+  const classes = useStyles();
   const [stockSymbols, setStockSymbols] = useState([]);
   const {savedStonks} = props;
 
@@ -21,18 +29,24 @@ function App(props) {
   }, []); // pass [] so that it doesnt re-render after getting stock symbols and setting state
 
   return (
-    <Grid container direction='row'>
-      <Grid container direction='column'>
-        <StockList stonks={stockSymbols}/>
-        <WatchList savedStonks={savedStonks}/>
+    <div className={classes.root}>
+      <Grid container spacing={1}>
+        <Grid container item xs={12} spacing={3}>
+          <Grid item xs={4}>
+            <StockList stonks={stockSymbols}/>
+            <WatchList savedStonks={savedStonks}/>
+          </Grid>      
+          <Grid item xs={4}>
+            <NewsFeedList savedStonks={savedStonks}/>        
+          </Grid>        
+        </Grid>
+        {/* <Grid container item direction='column'>
+        </Grid>
+        <Grid container direction='column'>
+          {/* TODO: Graph view here */}
+        {/* </Grid> */}
       </Grid>
-      <Grid container direction='column'>
-        <NewsFeedList savedStonks={savedStonks}/>
-      </Grid>
-      <Grid container direction='column'>
-        {/* TODO: Graph view here */}
-      </Grid>
-    </Grid>
+    </div>    
   );
 }
 

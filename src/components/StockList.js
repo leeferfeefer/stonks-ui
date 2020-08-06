@@ -9,12 +9,8 @@ import { connect } from "react-redux";
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
-        maxWidth: 360,
         backgroundColor: theme.palette.background.paper,
-    },
-    nested: {
-        paddingLeft: theme.spacing(4),
-    },
+    }
 }));
 
 function StockList(props) {
@@ -34,7 +30,7 @@ function StockList(props) {
         <List
             component="ul"
             subheader={
-                <ListSubheader component="div" id="nested-list-subheader">
+                <ListSubheader component="div">
                     Stonk List
                 </ListSubheader>
             }

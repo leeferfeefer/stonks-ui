@@ -7,12 +7,8 @@ import WatchListItem from './WatchListItem';
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
-        maxWidth: 360,
         backgroundColor: theme.palette.background.paper,
-    },
-    nested: {
-        paddingLeft: theme.spacing(4),
-    },
+    }
 }));
 
 function WatchList(props) {
@@ -30,7 +26,7 @@ function WatchList(props) {
         <List
             component="ul"
             subheader={
-                <ListSubheader component="div" id="nested-list-subheader">
+                <ListSubheader component="div">
                     Watch List
                 </ListSubheader>
             }
