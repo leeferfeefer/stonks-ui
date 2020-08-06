@@ -1,0 +1,58 @@
+{
+    "priority": 1,
+    "request": {
+        "method": "GET",
+        "urlPath": "/company/news",
+        "queryParameters" : {
+            "stockSymbol" : {
+              "equalTo" : "TSLA"
+            },
+            "fromDate": {
+                "matches": "(^[0-9]{4}-[0-9]{2}-[0-9]{2}$)"
+            },
+            "toDate": {
+                "matches": "(^[0-9]{4}-[0-9]{2}-[0-9]{2}$)"
+            }
+        }
+    },
+    "response": {
+        "status": 200,
+        "headers" : {
+            "Access-Control-Allow-Origin" : "*"
+        },
+        "fixedDelayMilliseconds": 0,
+        "jsonBody": [ {
+            "category": "company",
+            "datetime": 1594252800,
+            "headline": "Tesla Stock Predictions Bake In Extraordinary Expectations",
+            "id": 21555197,
+            "image": "https://i-invdn-com.akamaized.net/redesign/images/seo/v2/investingcom_analysis_og.jpg",
+            "related": "TSLA",
+            "source": "investing",
+            "summary": "Stocks Analysis by ValueWalk (Michelle Jones) covering: Alphabet Inc Class A, Apple Inc, Amazon.com Inc, Morgan Stanley. Read ValueWalk (Michelle Jones)'s latest article on Investing.com",
+            "url": "https://www.investing.com/analysis/tesla-stock-predictions-bake-in-extraordinary-expectations-200530244"
+        },
+        {
+            "category": "company",
+            "datetime": 1594252800,
+            "headline": "Tesla Vehicle Runs Into Stop Sign After 'Stoned' Owner Uses Smart Summon",
+            "id": 21555162,
+            "image": "https://cdn.benzinga.com/files/imagecache/og_image_social_share_1200x630/images/story/2012/3840x2160_mx_parked_-_city_1.jpg",
+            "related": "TSLA",
+            "source": "benzinga",
+            "summary": "Tesla Inc (NASDAQ: TSLA) is on track to make some of the world's first publicly available fully autonomous cars.\nAlthough they're not capable yet, there is one feature...",
+            "url": "https://www.benzinga.com/tech/20/07/16559687/tesla-vehicle-runs-into-stop-sign-after-stoned-owner-uses-smart-summon"
+        },
+        {
+            "category": "company",
+            "datetime": 1594252800,
+            "headline": "How Tesla's Chinese EV Market Is Worth $400 Per Share",
+            "id": 21555143,
+            "image": "https://cdn.benzinga.com/files/imagecache/og_image_social_share_1200x630/images/story/2012/shanghai_groundbreaking_event_-_1_1_3.png",
+            "related": "TSLA",
+            "source": "benzinga",
+            "summary": "China is a vital cog in Tesla Inc's (NASDAQ: TSLA) wheels, and Wedbush analyst issued a valuation Thursday for what Chinese EV market  is worth for the company.\nThe Tesla...",
+            "url": "https://www.benzinga.com/analyst-ratings/analyst-color/20/07/16569294/how-teslas-chinese-ev-market-is-worth-400-per-share"
+        }]
+    }
+}

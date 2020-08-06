@@ -11,9 +11,9 @@ const useStyles = makeStyles((theme) => ({
         maxWidth: 360,
         backgroundColor: theme.palette.background.paper,
     },
-    nested: {
-        paddingLeft: theme.spacing(4),
-    },
+    sectionHeader: {
+        textAlign: 'center'
+    }
 }));
 
 function NewsFeedList (props) {
@@ -29,33 +29,47 @@ function NewsFeedList (props) {
             let news = [];
             for (let stonk of savedStonks) {
                 const companyNews = await CompanyNewsService.getCompanyNews(stonk.symbol);
-                news = news.concat(companyNews);
+                const companyName = stonk.description;
+                const newsObject = {companyName, companyNews};
+                news.push(newsObject);
             }
-            setNewsStories(news);
+            setNewsStories(news);        
         };
         getCompanyNews();
     }, [savedStonks]);
 
-    const renderRow = () => {   
-        return newsStories ? 
-            newsStories.map((news, index) => 
-                <NewsFeedItem 
-                    key={index} 
-                    news={news}                 
-                />)
-            : null
-    };
+
     return (
         <List
             component="ul"
             subheader={
-                <ListSubheader component="div" id="nested-list-subheader">
+                <ListSubheader component="div">
                     News Feed
                 </ListSubheader>
             }
             className={classes.root}
         >           
-            {renderRow()}    
+            {newsStories.map(newsObject => {
+                const companyName = newsObject.companyName;
+                const companyNews = newsObject.companyNews;
+                return (
+                    <li key={`section-${companyName}`}>
+                        <ul>
+                            <ListSubheader component="div" className={classes.sectionHeader}>
+                                {`${companyName}`}
+                            </ListSubheader>
+                            {companyNews.map((news, index) => {
+                                return (
+                                    <NewsFeedItem 
+                                        key={`${companyName}-${index}`} 
+                                        news={news}                 
+                                    />
+                                );
+                            })}
+                        </ul>
+                    </li>
+                )
+            })}
         </List>
     );
 };

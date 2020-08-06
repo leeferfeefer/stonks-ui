@@ -1,0 +1,71 @@
+{
+    "priority": 1,
+    "request": {
+        "method": "GET",
+        "urlPath": "/company/news",
+        "queryParameters" : {
+            "stockSymbol" : {
+              "equalTo" : "HD"
+            },
+            "fromDate": {
+                "matches": "(^[0-9]{4}-[0-9]{2}-[0-9]{2}$)"
+            },
+            "toDate": {
+                "matches": "(^[0-9]{4}-[0-9]{2}-[0-9]{2}$)"
+            }
+        }
+    },
+    "response": {
+        "status": 200,
+        "headers" : {
+            "Access-Control-Allow-Origin" : "*"
+        },
+        "fixedDelayMilliseconds": 0,
+        "jsonBody": [    
+            {
+                "category": "company",
+                "datetime": 1594240980,
+                "headline": "YRC Lenders Agree to Extend Trucker’s Debt Terms",
+                "id": 21573512,
+                "image": "https://images.wsj.net/im-206987/social",
+                "related": "HD",
+                "source": "wsj",
+                "summary": "YRC Worldwide’s lenders gave the troubled trucker a three-and-a-half year reprieve on its heavy debt load as the company prepares for a $700 million federal bailout package.",
+                "url": "https://www.wsj.com/articles/yrc-lenders-agree-to-extend-truckers-debt-terms-11594238914"
+            },
+            {
+                "category": "company news",
+                "datetime": 1594212840,
+                "headline": "Have Money You&#39;re Waiting to Invest? Buy These 2 Stocks When the Market Pulls Back",
+                "id": 19199918,
+                "image": "",
+                "related": "HD",
+                "source": "Yahoo",
+                "summary": "Home Depot (NYSE: HD) proved to be resilient during the pandemic.  Importantly, in the post-pandemic long run, Home Depot can stave off Amazon from encroaching on its business.  The initiative aims to make it easier for customers to order online and pick up in-store, for example, which is a more profitable transaction for Home Depot compared to shipping.",
+                "url": "https://finance.yahoo.com/m/2f1cb683-df23-35c6-887c-acd627da93ae/have-money-you%26%2339%3Bre-waiting.html"
+            },
+            {
+                "category": "company",
+                "datetime": 1594212840,
+                "headline": "Have Money You're Waiting to Invest? Buy These 2 Stocks When the Market Pulls Back | The Motley Fool",
+                "id": 19159353,
+                "image": "https://g.foolcdn.com/editorial/images/580919/gettyimages-638375170.jpg",
+                "related": "HD",
+                "source": "https://www.fool.com",
+                "summary": "Investing in proven winners during market crashes is a recipe for success.",
+                "url": "https://www.fool.com/investing/2020/07/08/have-money-youre-waiting-invest-buy-these-2-stocks.aspx"
+            },
+            {
+                "category": "company",
+                "datetime": 1594144057,
+                "headline": "Businesses, sick of policing mask use to prevent coronavirus, ask government to step in",
+                "id": 19151836,
+                "image": "https://image.cnbcfm.com/api/v1/image/106584637-1592574193482gettyimages-1221054178.jpeg?v=1592574243",
+                "related": "HD",
+                "source": "cnbc",
+                "summary": "Faced with a dearth of government rules, corporations are mandating their own face mask policies to protect customers and staff from Covid-19.",
+                "url": "https://www.cnbc.com/2020/07/07/businesses-sick-of-policing-mask-use-ask-government-to-step-in.html"
+            }
+        ]
+    }
+}

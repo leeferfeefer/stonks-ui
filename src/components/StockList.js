@@ -22,15 +22,13 @@ function StockList(props) {
     const {stonks, saveStonk, deleteStonk} = props;
 
     const renderRow = () => {
-        return stonks ? 
-            stonks.map((stonk, index) => 
+        return stonks.map((stonk, index) => 
                 <StockListItem 
                     key={index} 
                     stonk={stonk} 
                     saveStonk={saveStonk}
                     deleteStonk={deleteStonk}
-                />)
-            : null
+                />);
     };
     return (
         <List
@@ -45,7 +43,7 @@ function StockList(props) {
             {renderRow()}    
         </List>
     );
-}
+};
 
 const mapDispatchToProps = dispatch => {
     return {
@@ -56,6 +54,6 @@ const mapDispatchToProps = dispatch => {
             dispatch(deleteStonk(stonk));
         }
     }
-}
+};
 
 export default connect(null, mapDispatchToProps)(StockList);

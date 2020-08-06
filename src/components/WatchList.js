@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import List from '@material-ui/core/List';
 import WatchListItem from './WatchListItem';
-import { connect } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -21,13 +20,11 @@ function WatchList(props) {
     const {savedStonks} = props;
     
     const renderRow = () => {
-        return savedStonks ? 
-            savedStonks.map((savedStonk, index) => 
+        return savedStonks.map((savedStonk, index) => 
                 <WatchListItem 
                     key={index} 
                     savedStonk={savedStonk}
-                />)
-            : null
+                />);
     };
     return (
         <List
