@@ -6,7 +6,7 @@ export default class CompanyProfileService {
     static getCompanyProfile = async (stockSymbol) => {
         let companyProfile = {};
         try {
-            const response = await AxiosService.api.get('/company/profile', {
+            const response = await AxiosService.api.get('/stocks/company/profile', {
                 params: {
                     stockSymbol
                 }

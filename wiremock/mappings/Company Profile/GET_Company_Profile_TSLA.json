@@ -19,13 +19,13 @@
             "country": "US",
             "currency": "USD",
             "exchange": "NASDAQ NMS - GLOBAL MARKET",
-            "finnhub_industry": "Automobiles",
-            "ipo": "Tue, 29 Jun 2010 00:00:00 GMT",
+            "finnhubIndustry": "Automobiles",
+            "ipo": "2010-06-29",
             "logo": "https://static.finnhub.io/logo/2dd96524-80c9-11ea-aaac-00000000092a.png",
-            "market_capitalization": 266638.9,
+            "marketCapitalization": 270729.5,
             "name": "Tesla Inc",
             "phone": "16506815000",
-            "share_outstanding": 186.361726,
+            "shareOutstanding": 186.361726,
             "ticker": "TSLA",
             "weburl": "https://www.tesla.com/"
         }

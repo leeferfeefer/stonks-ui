@@ -1,18 +1,18 @@
 
 
 export default class CompanyProfile {
-    constructor(country, currency, exchange, finnhub_industry, ipo, logo, 
-        market_capitalization, name, phone, share_outstanding, ticker, weburl) {
+    constructor(country, currency, exchange, finnhubIndustry, ipo, logo, 
+        marketCapitalization, name, phone, shareOutstanding, ticker, weburl) {
         this.country = country;
         this.currency = currency;    
         this.exchange = exchange;
-        this.industry = finnhub_industry;
+        this.industry = finnhubIndustry;
         this.ipo = ipo;
         this.logo = logo;
-        this.marketCap = market_capitalization;
+        this.marketCap = marketCapitalization;
         this.name = name;
         this.phone = phone;
-        this.shareOutstanding = share_outstanding;
+        this.shareOutstanding = shareOutstanding;
         this.ticker = ticker;
         this.weburl = weburl;
     }
@@ -34,8 +34,8 @@ export default class CompanyProfile {
     };
 
     static fromJSON = (json) => {
-        return new CompanyProfile(json.country, json.currency, json.exchange, json.finnhub_industry, 
-            json.ipo, json.logo, CompanyProfile._convertMarketCap(json.market_capitalization), json.name, json.phone, 
-            CompanyProfile._convertShareOutstanding(json.share_outstanding), json.ticker, json.weburl);
+        return new CompanyProfile(json.country, json.currency, json.exchange, json.finnhubIndustry, 
+            json.ipo, json.logo, CompanyProfile._convertMarketCap(json.marketCapitalization), json.name, json.phone, 
+            CompanyProfile._convertShareOutstanding(json.shareOutstanding), json.ticker, json.weburl);
     };
 }

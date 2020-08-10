@@ -50,7 +50,10 @@ export default function StockListItem(props) {
     return (
         <>
             <ListItem button dense onClick={handleClick}>            
-                <ListItemText primary={`${stonk.symbol} - ${stonk.description}`} />
+                <ListItemText 
+                    primary={`${stonk.description}`} 
+                    secondary={`${stonk.symbol}`}
+                />
                 {isSelected ? <ExpandLess /> : <ExpandMore />}
                 <ListItemSecondaryAction>
                     <Checkbox
@@ -62,10 +65,23 @@ export default function StockListItem(props) {
             <Collapse in={isSelected} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
                     <ListItem className={classes.nested}>
-                        <ListItemText primary={`${companyProfile.industry}`}/>
-                        <ListItemText primary={`${companyProfile.marketCap}`}/>
-                        <ListItemText primary={`${companyProfile.shareOutstanding}`}/>
+                        <ListItemText 
+                            primary={"Industry"}
+                            secondary={`${companyProfile.industry}`}
+                        />                        
                     </ListItem>
+                    <ListItem className={classes.nested}>
+                        <ListItemText 
+                            primary={"Market Capitalization"} 
+                            secondary={`${companyProfile.marketCap}`}
+                        />
+                    </ListItem>
+                    <ListItem className={classes.nested}>
+                        <ListItemText 
+                            primary={"Shares Outstanding"} 
+                            secondary={`${companyProfile.shareOutstanding}`}
+                        />
+                    </ListItem>                
                 </List>
             </Collapse>
         </>
