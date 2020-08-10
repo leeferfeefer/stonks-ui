@@ -11,10 +11,19 @@ import StockSymbolsService from "../service/StockSymbols.service";
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 const useStyles = makeStyles((theme) => ({
+    listLabel: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        textAlign: 'center',
+        height: window.innerHeight,
+    },
     paper: {
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        height: window.innerHeight,
+        width: 360
     },
     list: {    
         maxHeight: window.innerHeight,
@@ -58,17 +67,23 @@ function StockList(props) {
     return (
         <Paper className={classes.paper}>
             {loading && <CircularProgress className={classes.spinner}/>}
-            <List
-                className={classes.list}
-                component="ul"
-                subheader={
-                    <ListSubheader component="div">
-                        Stonk List
-                    </ListSubheader>
-                }
-            >           
-                {renderRow()}    
-            </List> 
+            {stockSymbols.length === 0 ?            
+                <div className={classes.listLabel}>
+                    Stonk List
+                </div>                 
+            :
+                <List
+                    className={classes.list}
+                    component="ul"
+                    subheader={
+                        <ListSubheader component="div">
+                            Stonk List
+                        </ListSubheader>
+                    }
+                >           
+                    {renderRow()}    
+                </List> 
+            }
         </Paper>
     );
 };

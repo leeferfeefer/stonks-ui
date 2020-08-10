@@ -35,7 +35,10 @@ export default function WatchListItem(props) {
     return (
         <>
             <ListItem button dense onClick={handleClick}>
-                <ListItemText primary={`${savedStonk.symbol} - ${savedStonk.description}`} />
+                <ListItemText 
+                    primary={`${savedStonk.description}`} 
+                    secondary={`${savedStonk.symbol}`}
+                />
             </ListItem>        
         </>
     );

@@ -26,11 +26,9 @@ function App(props) {
             <Grid item>
               <StockList/>
             </Grid>    
-            {/* <Grid item>
-              <Card>
-                <WatchList savedStonks={savedStonks}/>                    
-              </Card>
-            </Grid> */}
+            <Grid item>
+                <WatchList/>                    
+            </Grid>
           </Grid>      
           {/* <Grid item xs={4}> */}
             {/* <Card style={{maxHeight: '50%', overflow: 'auto'}}> */}
