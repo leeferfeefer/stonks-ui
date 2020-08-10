@@ -17,10 +17,11 @@ function WatchList(props) {
     
     const renderRow = () => {
         return savedStonks.map((savedStonk, index) => 
-                <WatchListItem 
-                    key={index} 
-                    savedStonk={savedStonk}
-                />);
+            <WatchListItem 
+                key={index} 
+                savedStonk={savedStonk}
+            />
+        );
     };
     return (
         <List

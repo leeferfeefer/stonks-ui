@@ -3,7 +3,7 @@ import StockSymbol from '../model/StockSymbol';
 
 export default class StockSymbolsService {
 
-    static getStockSymbols = async () => {
+    static getStockSymbols = async (page) => {
         const stockSymbols = [];
         try {
             const response = await AxiosService.api.get('/stocks/symbols');

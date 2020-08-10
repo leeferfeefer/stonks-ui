@@ -38,6 +38,28 @@ function NewsFeedList (props) {
     }, [savedStonks]);
 
 
+    const renderRow = () => {
+        return newsStories.map(newsObject => {
+            const companyName = newsObject.companyName;
+            const companyNews = newsObject.companyNews;
+            return (
+                <React.Fragment key={`${companyName}Fragment`}>
+                    <ListSubheader key={`${companyName}`} component="div" className={classes.sectionHeader}>
+                        {`${companyName}`}
+                    </ListSubheader>
+                    {companyNews.map((news, index) => {
+                        return (
+                            <NewsFeedItem 
+                                key={`${companyName}-${index}`} 
+                                news={news}                 
+                            />
+                        );
+                    })}
+                </React.Fragment>            
+            )
+        });
+    };
+
     return (
         <List
             component="ul"
@@ -48,27 +70,7 @@ function NewsFeedList (props) {
             }
             className={classes.root}
         >           
-            {newsStories.map(newsObject => {
-                const companyName = newsObject.companyName;
-                const companyNews = newsObject.companyNews;
-                return (
-                    <li key={`section-${companyName}`}>
-                        <ul>
-                            <ListSubheader component="div" className={classes.sectionHeader}>
-                                {`${companyName}`}
-                            </ListSubheader>
-                            {companyNews.map((news, index) => {
-                                return (
-                                    <NewsFeedItem 
-                                        key={`${companyName}-${index}`} 
-                                        news={news}                 
-                                    />
-                                );
-                            })}
-                        </ul>
-                    </li>
-                )
-            })}
+            {renderRow()}
         </List>
     );
 };

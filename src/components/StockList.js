@@ -6,12 +6,13 @@ import StockListItem from './StockListItem';
 import { saveStonk, deleteStonk } from '../redux/actions/savedStonksActions';
 import { connect } from "react-redux";
 
+
 const useStyles = makeStyles((theme) => ({
-    root: {
-        width: '100%',
-        backgroundColor: theme.palette.background.paper,
+    list: {
+      maxHeight: '100%'
     }
 }));
+  
 
 function StockList(props) {
     const classes = useStyles();
@@ -19,25 +20,26 @@ function StockList(props) {
 
     const renderRow = () => {
         return stonks.map((stonk, index) => 
-                <StockListItem 
-                    key={index} 
-                    stonk={stonk} 
-                    saveStonk={saveStonk}
-                    deleteStonk={deleteStonk}
-                />);
+            <StockListItem 
+                key={index} 
+                stonk={stonk} 
+                saveStonk={saveStonk}
+                deleteStonk={deleteStonk}
+            />
+        );
     };
     return (
         <List
+            className={classes.list}
             component="ul"
             subheader={
                 <ListSubheader component="div">
                     Stonk List
                 </ListSubheader>
             }
-            className={classes.root}
         >           
             {renderRow()}    
-        </List>
+        </List> 
     );
 };
 

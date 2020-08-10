@@ -12,20 +12,26 @@
         "fixedDelayMilliseconds": 0,
         "jsonBody": [    
             {
+                "currency": "USD",
                 "description": "APPLE INC",
-                "display_symbol": "AAPL",
-                "symbol": "AAPL"
+                "displaySymbol": "AAPL",
+                "symbol": "AAPL",
+                "type": "EQS"
+            },         
+            {
+                "currency": "USD",
+                "description": "HOME DEPOT INC",
+                "displaySymbol": "HD",
+                "symbol": "HD",
+                "type": "EQS"
             },            
             {
-                "description": "HOME DEPOT INC",
-                "display_symbol": "HD",
-                "symbol": "HD"
-            },                    
-            {
+                "currency": "USD",
                 "description": "TESLA INC",
-                "display_symbol": "TSLA",
-                "symbol": "TSLA"
-            }        
+                "displaySymbol": "TSLA",
+                "symbol": "TSLA",
+                "type": "EQS"
+            }  
         ]
     }
 }
