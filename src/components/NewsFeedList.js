@@ -4,14 +4,35 @@ import ListSubheader from '@material-ui/core/ListSubheader';
 import List from '@material-ui/core/List';
 import CompanyNewsService from '../service/CompanyNews.service';
 import NewsFeedItem from './NewsFeedItem';
+import Paper from '@material-ui/core/Paper';
+import Divider from '@material-ui/core/Divider';
+import { connect } from "react-redux";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        width: '100%',
-        backgroundColor: theme.palette.background.paper,
+    listLabel: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        textAlign: 'center',
+        height: window.innerHeight,
+    },
+    paper: {
+        display: 'flex',
+        justifyContent: 'center',
+        height: window.innerHeight,
+        width: 360
     },
     sectionHeader: {
         textAlign: 'center'
+    },
+    list: {    
+        maxHeight: window.innerHeight,
+        overflow: 'scroll',
+    },
+    spinner: {
+        position: 'absolute',
+        marginTop: '50%'
     }
 }));
 
@@ -22,12 +43,15 @@ function NewsFeedList (props) {
     // TODO: Initialize this state as the news stories saved into redux
     // instead of empty array - then replace the difference
     const [newsStories, setNewsStories] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const getCompanyNews = async () => {
             let news = [];
             for (let stonk of savedStonks) {
+                setLoading(true);
                 const companyNews = await CompanyNewsService.getCompanyNews(stonk.symbol);
+                setLoading(false);
                 const companyName = stonk.description;
                 const newsObject = {companyName, companyNews};
                 news.push(newsObject);
@@ -49,10 +73,13 @@ function NewsFeedList (props) {
                     </ListSubheader>
                     {companyNews.map((news, index) => {
                         return (
-                            <NewsFeedItem 
-                                key={`${companyName}-${index}`} 
-                                news={news}                 
-                            />
+                            <React.Fragment key={`${index}Fragment`}>
+                                <NewsFeedItem 
+                                    key={`${companyName}-${index}`} 
+                                    news={news}                 
+                                />
+                                <Divider/>
+                            </React.Fragment>
                         );
                     })}
                 </React.Fragment>            
@@ -61,19 +88,33 @@ function NewsFeedList (props) {
     };
 
     return (
-        <List
-            component="ul"
-            subheader={
-                <ListSubheader component="div">
+        <Paper className={classes.paper}>    
+            {loading && <CircularProgress className={classes.spinner}/>}        
+            {savedStonks.length === 0 ? 
+                <div className={classes.listLabel}>
                     News Feed
-                </ListSubheader>
+                </div> 
+            :
+                <List
+                    className={classes.list}
+                    component="ul"
+                    subheader={
+                        <ListSubheader component="div">
+                            News Feed
+                        </ListSubheader>
+                    }
+                >           
+                    {renderRow()}
+                </List>
             }
-            className={classes.root}
-        >           
-            {renderRow()}
-        </List>
+        </Paper>
     );
 };
 
+const mapStateToProps = state => {
+    return {
+        savedStonks: state.savedStonksReducer.savedStonks
+    }
+};
 
-export default NewsFeedList;
+export default connect(mapStateToProps, null)(NewsFeedList);

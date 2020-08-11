@@ -1,7 +1,8 @@
 
 
 export default class CompanyNews {
-    constructor(datetime, headline, id, image, related, source, summary, url) {
+    constructor(category, datetime, headline, id, image, related, source, summary, url) {
+        this.category = category;
         this.datetime = datetime;
         this.headline = headline;
         this.id = id;
@@ -13,7 +14,7 @@ export default class CompanyNews {
     }
 
     static fromJSON = (json) => {
-        return new CompanyNews(json.datetime, json.headline, json.id, json.image, json.related, 
+        return new CompanyNews(json.category, json.datetime, json.headline, json.id, json.image, json.related, 
             json.source, json.summary, json.url);
     };
 };

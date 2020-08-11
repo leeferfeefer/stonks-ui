@@ -21,7 +21,7 @@ export default class CompanyNewsService {
         };
 
         try {
-            const response = await AxiosService.api.get('/company/news', {
+            const response = await AxiosService.api.get('/stocks/company/news', {
                 params: {
                     stockSymbol,
                     fromDate: `${fullYear}-${getMonth()}-${getDay()}`,

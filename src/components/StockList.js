@@ -21,7 +21,6 @@ const useStyles = makeStyles((theme) => ({
     paper: {
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center',
         height: window.innerHeight,
         width: 360
     },
@@ -30,7 +29,8 @@ const useStyles = makeStyles((theme) => ({
         overflow: 'scroll',
     },
     spinner: {
-        position: 'absolute'
+        position: 'absolute',
+        marginTop: '50%'
     }
 }));
   

@@ -21,7 +21,7 @@
             "Access-Control-Allow-Origin" : "*"
         },
         "fixedDelayMilliseconds": 0,
-        "jsonBody": [ {
+        "jsonBody": [{
             "category": "company",
             "datetime": 1594252800,
             "headline": "Tesla Stock Predictions Bake In Extraordinary Expectations",
