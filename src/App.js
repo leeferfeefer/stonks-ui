@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import StockList from "./components/StockList";
 import WatchList from "./components/WatchList";
 import NewsFeedList from "./components/NewsFeedList";
+import Drawer from "./components/Drawer";
 import { connect } from "react-redux";
 
 
@@ -16,42 +17,41 @@ const useStyles = makeStyles((theme) => ({
 
 function App(props) {
   const classes = useStyles();
-  const {savedStonks} = props;
+  const { savedStonks, currentScreenIndex } = props;
 
-  return (    
-    <div className={classes.root}>
-      <Grid container spacing={1}>
-        <Grid item xs={12}>
-          <Grid container spacing={1}>
-            <Grid item>
-              <StockList/>
-            </Grid>    
-            <Grid item>
-              <WatchList/>                    
+  return (
+    <div className={classes.root}>      
+      <Drawer>
+        <Grid container spacing={1}>
+          <Grid item xs={12}>
+            <Grid container spacing={1}>
+              {currentScreenIndex === 0 &&
+                <>
+                  <Grid item>
+                    <StockList />
+                  </Grid>
+                  <Grid item>
+                    <WatchList />
+                  </Grid>
+                </>
+              }    
+              {currentScreenIndex === 1 &&
+                <Grid item>
+                  <NewsFeedList />
+                </Grid>
+              }                        
             </Grid>
-            <Grid item>
-              <NewsFeedList/> 
-            </Grid>
-          </Grid>    
- 
-            {/* <Card style={{maxHeight: '50%', overflow: 'auto'}}> */}
-              {/* <NewsFeedList savedStonks={savedStonks}/>         */}
-            {/* </Card> */}
-          {/* </Grid>         */}
-        {/* </Grid> */}
-        {/* <Grid container item direction='column'>
+          </Grid>
         </Grid>
-        <Grid container direction='column'>
-          {/* TODO: Graph view here */}
-        </Grid>
-      </Grid>
+      </Drawer>
     </div>
   );
 }
 
 const mapStateToProps = state => {
   return {
-      savedStonks: state.savedStonksReducer.savedStonks
+    savedStonks: state.savedStonksReducer.savedStonks,
+    currentScreenIndex: state.currentScreenReducer.currentScreenIndex
   }
 };
 

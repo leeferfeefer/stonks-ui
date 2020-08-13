@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import List from '@material-ui/core/List';
 import CompanyNewsService from '../service/CompanyNews.service';
-import NewsFeedItem from './NewsFeedItem';
+import NewsFeedListItem from './NewsFeedListItem';
 import Paper from '@material-ui/core/Paper';
 import Divider from '@material-ui/core/Divider';
 import { connect } from "react-redux";
@@ -74,7 +74,7 @@ function NewsFeedList (props) {
                     {companyNews.map((news, index) => {
                         return (
                             <React.Fragment key={`${index}Fragment`}>
-                                <NewsFeedItem 
+                                <NewsFeedListItem 
                                     key={`${companyName}-${index}`} 
                                     news={news}                 
                                 />
