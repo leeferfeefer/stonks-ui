@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -9,6 +9,8 @@ import List from '@material-ui/core/List';
 import CompanyProfileService from '../service/CompanyProfile.service';
 import Checkbox from '@material-ui/core/Checkbox';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import {containsObjectWithFieldNameValue} from '../utils/ObjectUtils';
+import { connect } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -21,12 +23,18 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function StockListItem(props) {
+function StockListItem(props) {
     const classes = useStyles();
     const [isSelected, setIsSelected] = useState(false);
     const [isChecked, setIsChecked] = useState(false);
     const [companyProfile, setCompanyProfile] = useState({});
-    const {stonk} = props;
+    const {stonk, savedStonks} = props;
+
+    useEffect(() => {
+        if (containsObjectWithFieldNameValue(savedStonks, 'symbol', stonk.symbol)) {
+            setIsChecked(true);
+        }
+    }, [savedStonks]);
 
     const handleClick = async () => {
         if (!isSelected) {
@@ -59,6 +67,7 @@ export default function StockListItem(props) {
                     <Checkbox
                         edge="end"
                         onChange={handleCheckBoxChange}
+                        checked={isChecked}
                     />
                 </ListItemSecondaryAction>
             </ListItem>
@@ -87,3 +96,13 @@ export default function StockListItem(props) {
         </>
     );
 }
+
+
+const mapStateToProps = state => {
+    return {
+        savedStonks: state.savedStonksReducer.savedStonks
+    }
+};
+
+
+export default connect(mapStateToProps, null)(StockListItem);

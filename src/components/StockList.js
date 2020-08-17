@@ -51,6 +51,15 @@ function StockList(props) {
         getStockSymbols();
     }, []); // pass [] so that it doesnt re-render after getting stock symbols and setting state
 
+
+    const reconcileReduxStonks = (retrievedStonks) => {
+        if (!!retrievedStonks && retrievedStonks.length > 0) {
+
+            
+            // save to redux here
+        };
+    };
+
     const renderRow = () => {
         return stockSymbols.map((stonk, index) => 
             <React.Fragment key={`${index}-divider`}>
