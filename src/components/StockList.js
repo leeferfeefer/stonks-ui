@@ -44,7 +44,7 @@ function StockList(props) {
     // runs both after the first render and after every update.
     useEffect(() => {
         const getStockSymbols = async () => {            
-            const stockSymbols = await StockSymbolsService.getStockSymbols();
+            const stockSymbols = await StockSymbolsService.getStockSymbols(0);
             setLoading(false);
             setStockSymbols(stockSymbols);
         }

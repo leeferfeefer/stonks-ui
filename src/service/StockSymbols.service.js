@@ -6,7 +6,12 @@ export default class StockSymbolsService {
     static getStockSymbols = async (page) => {
         const stockSymbols = [];
         try {
-            const response = await AxiosService.api.get('/stocks/symbols');
+            const response = await AxiosService.api.get('/stocks/symbols', {
+                params: {
+                    "pageNumber": page,
+                    "quantity": 50
+                }
+            });
             const symbols = response.data;
     
             for (let symbol of symbols) {
