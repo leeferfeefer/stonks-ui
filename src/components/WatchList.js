@@ -13,14 +13,14 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'center',
         alignItems: 'center',
         textAlign: 'center',
-        height: window.innerHeight,
+        height: window.innerHeight-110
     },
     paper: {
-        height: window.innerHeight,
+        height: window.innerHeight-110,
         width: 360
     },
     list: {    
-        maxHeight: window.innerHeight,
+        maxHeight: window.innerHeight-110,
         overflow: 'scroll',
     }
 }));

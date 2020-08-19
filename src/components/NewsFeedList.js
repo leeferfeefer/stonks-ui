@@ -15,19 +15,19 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'center',
         alignItems: 'center',
         textAlign: 'center',
-        height: window.innerHeight,
+        height: window.innerHeight-110,
     },
     paper: {
         display: 'flex',
         justifyContent: 'center',
-        height: window.innerHeight,
+        height: window.innerHeight-110,
         width: 360
     },
     sectionHeader: {
         textAlign: 'center'
     },
     list: {    
-        maxHeight: window.innerHeight,
+        maxHeight: window.innerHeight-110,
         overflow: 'scroll',
     },
     spinner: {

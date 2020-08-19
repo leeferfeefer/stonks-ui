@@ -12,6 +12,9 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     maxHeight: window.innerHeight
+  },
+  stonks: {
+    position: "sticky"
   }
 }));
 

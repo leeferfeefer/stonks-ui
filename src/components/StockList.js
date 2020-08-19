@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import List from '@material-ui/core/List';
@@ -16,16 +16,16 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'center',
         alignItems: 'center',
         textAlign: 'center',
-        height: window.innerHeight,
+        height: window.innerHeight-110
     },
     paper: {
         display: 'flex',
         justifyContent: 'center',
-        height: window.innerHeight,
+        height: window.innerHeight-110,
         width: 360
     },
     list: {    
-        maxHeight: window.innerHeight,
+        maxHeight: window.innerHeight-110,
         overflow: 'scroll',
     },
     spinner: {
@@ -40,25 +40,19 @@ function StockList(props) {
     const {stonks, saveStonk, deleteStonk} = props;
     const [stockSymbols, setStockSymbols] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [page, setPage] = useState(0);
+    const [prevY, setPrevY] = useState(0);
 
     // runs both after the first render and after every update.
     useEffect(() => {
         const getStockSymbols = async () => {            
-            const stockSymbols = await StockSymbolsService.getStockSymbols(0);
+            const stockSymbols = await StockSymbolsService.getStockSymbols(page);
             setLoading(false);
             setStockSymbols(stockSymbols);
         }
         getStockSymbols();
-    }, []); // pass [] so that it doesnt re-render after getting stock symbols and setting state
+    }, [page]); // pass [] so that it doesnt re-render after getting stock symbols and setting state
 
-
-    const reconcileReduxStonks = (retrievedStonks) => {
-        if (!!retrievedStonks && retrievedStonks.length > 0) {
-
-            
-            // save to redux here
-        };
-    };
 
     const renderRow = () => {
         return stockSymbols.map((stonk, index) => 
@@ -80,7 +74,7 @@ function StockList(props) {
                 <div className={classes.listLabel}>
                     Stonk List
                 </div>                 
-            :
+            :                
                 <List
                     className={classes.list}
                     component="ul"
@@ -91,7 +85,7 @@ function StockList(props) {
                     }
                 >           
                     {renderRow()}    
-                </List> 
+                </List>         
             }
         </Paper>
     );
