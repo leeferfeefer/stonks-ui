@@ -70,7 +70,6 @@ function StockList(props) {
             } else {
                 setIsNoResults(true);
             }    
-            setStockSymbols(stockSymbols);
         }
         getStockSymbols();
     }, [page, searchQuery]);
@@ -109,6 +108,7 @@ function StockList(props) {
                         label="Stonk Search" 
                         variant="outlined" 
                         onChange={onSearchBarTextChange}
+                        value={searchQuery}
                     />
                     {isNoResults && <div className={classes.noSearchResults}>No Results!</div>}
                     <div className={classes.buttonGroup}>                        
