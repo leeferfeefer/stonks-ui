@@ -9,8 +9,6 @@ import List from '@material-ui/core/List';
 import CompanyProfileService from '../service/CompanyProfile.service';
 import Checkbox from '@material-ui/core/Checkbox';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import {containsObjectWithFieldNameValue} from '../utils/ObjectUtils';
-import { connect } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -26,15 +24,9 @@ const useStyles = makeStyles((theme) => ({
 function StockListItem(props) {
     const classes = useStyles();
     const [isSelected, setIsSelected] = useState(false);
-    const [isChecked, setIsChecked] = useState(false);
     const [companyProfile, setCompanyProfile] = useState({});
-    const {stonk, savedStonks} = props;
-
-    useEffect(() => {
-        if (containsObjectWithFieldNameValue(savedStonks, 'symbol', stonk.symbol)) {
-            setIsChecked(true);
-        }
-    }, [savedStonks]);
+    const {stonk, savedStonks, isChecked} = props;
+    const [isCheckedState, setIsCheckedState] = useState(isChecked);
 
     const handleClick = async () => {
         if (!isSelected) {
@@ -47,12 +39,12 @@ function StockListItem(props) {
     const handleCheckBoxChange = () => {
         const {saveStonk, deleteStonk} = props;
 
-        if (!isChecked) {
+        if (!isCheckedState) {
             saveStonk(stonk);
         } else {
             deleteStonk(stonk);
         }
-        setIsChecked(!isChecked);
+        setIsCheckedState(!isCheckedState);
     };
 
     return (
@@ -67,7 +59,7 @@ function StockListItem(props) {
                     <Checkbox
                         edge="end"
                         onChange={handleCheckBoxChange}
-                        checked={isChecked}
+                        checked={isCheckedState}
                     />
                 </ListItemSecondaryAction>
             </ListItem>
@@ -97,12 +89,4 @@ function StockListItem(props) {
     );
 }
 
-
-const mapStateToProps = state => {
-    return {
-        savedStonks: state.savedStonksReducer.savedStonks
-    }
-};
-
-
-export default connect(mapStateToProps, null)(StockListItem);
+export default StockListItem;

@@ -5,7 +5,7 @@ export const containsObject = (obj, array) => {
 };
 
 export const containsObjectWithFieldNameValue = (array, fieldName, fieldValue) => {
-    return array.some(elem => elem[fieldName] === fieldValue);
+    return array.some(elem => elem[fieldName] === fieldValue);    
 };
 
 export const getObjectsFromArrayWithFieldNameValue = (array, fieldName, fieldValue) => {

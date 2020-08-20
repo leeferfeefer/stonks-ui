@@ -11,6 +11,7 @@ import StockSymbolsService from "../service/StockSymbols.service";
 import CircularProgress from '@material-ui/core/CircularProgress';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import {containsObjectWithFieldNameValue} from '../utils/ObjectUtils';
 
 const useStyles = makeStyles((theme) => ({
     listLabel: {
@@ -31,8 +32,7 @@ const useStyles = makeStyles((theme) => ({
         overflow: 'scroll',
     },
     spinner: {
-        position: 'absolute',
-        marginTop: '30%'
+        position: 'absolute'
     },
     searchBar: {
         width: '100%'
@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
 
 function StockList(props) {
     const classes = useStyles();
-    const { stonks, saveStonk, deleteStonk } = props;
+    const {savedStonks, saveStonk, deleteStonk} = props;
     let [stockSymbols, setStockSymbols] = useState([]);
     const [loading, setLoading] = useState(true);
     let [page, setPage] = useState(0);
@@ -59,10 +59,12 @@ function StockList(props) {
 
     // runs both after the first render and after every update.
     useEffect(() => {
+        setLoading(true);
         const getStockSymbols = async () => {
             const stockSymbols = await StockSymbolsService.getStockSymbols(page, searchQuery);
             setLoading(false);
             if (stockSymbols.length > 0) {
+                setStockSymbols([]);
                 setStockSymbols(stockSymbols);   
                 setIsNoResults(false);            
             } else {
@@ -86,11 +88,14 @@ function StockList(props) {
                     stonk={stonk}
                     saveStonk={saveStonk}
                     deleteStonk={deleteStonk}
+                    isChecked={containsObjectWithFieldNameValue(savedStonks, 'symbol', stonk.symbol)}
                 />
                 <Divider />
             </React.Fragment>
         );
     };
+
+
     return (
         <Paper className={classes.paper}>
             {loading && <CircularProgress className={classes.spinner} />}
