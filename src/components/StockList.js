@@ -9,6 +9,8 @@ import Divider from '@material-ui/core/Divider';
 import Paper from '@material-ui/core/Paper';
 import StockSymbolsService from "../service/StockSymbols.service";
 import CircularProgress from '@material-ui/core/CircularProgress';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
     listLabel: {
@@ -21,16 +23,27 @@ const useStyles = makeStyles((theme) => ({
     paper: {
         display: 'flex',
         justifyContent: 'center',
-        height: window.innerHeight - 110,
+        height: window.innerHeight - 100,
         width: 360
     },
     list: {
-        maxHeight: window.innerHeight - 110,
+        maxHeight: window.innerHeight - 195,
         overflow: 'scroll',
     },
     spinner: {
         position: 'absolute',
-        marginTop: '50%'
+        marginTop: '30%'
+    },
+    searchBar: {
+        width: '100%'
+    },
+    noSearchResults: {
+        color: 'red'
+    },
+    buttonGroup: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-around'
     }
 }));
 
@@ -41,49 +54,29 @@ function StockList(props) {
     let [stockSymbols, setStockSymbols] = useState([]);
     const [loading, setLoading] = useState(true);
     let [page, setPage] = useState(0);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [isNoResults, setIsNoResults] = useState(false);
 
     // runs both after the first render and after every update.
     useEffect(() => {
         const getStockSymbols = async () => {
-            const stockSymbolsResponse = await StockSymbolsService.getStockSymbols(page);
+            const stockSymbols = await StockSymbolsService.getStockSymbols(page, searchQuery);
             setLoading(false);
-            setStockSymbols([...stockSymbols, ...stockSymbolsResponse]);
+            if (stockSymbols.length > 0) {
+                setStockSymbols(stockSymbols);   
+                setIsNoResults(false);            
+            } else {
+                setIsNoResults(true);
+            }    
+            setStockSymbols(stockSymbols);
         }
         getStockSymbols();
-    }, [page]); // pass [] so that it doesnt re-render after getting stock symbols and setting state
+    }, [page, searchQuery]);
 
 
-    // INFINITE SCROLL LOGIC
-    // --------------------------------------------------
-    const [bottom, setBottom] = React.useState(null);
-    const bottomObserver = React.useRef(null);
-
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            entries => {
-                const entry = entries[0];
-                if (entry.isIntersecting) {
-                    setPage(++page);
-                }
-            },
-            { threshold: 0.25, rootMargin: "50px" }
-        );
-        bottomObserver.current = observer;
-    }, []);
-
-    React.useEffect(() => {
-        const observer = bottomObserver.current;
-        if (bottom) {
-            observer.observe(bottom);
-        }
-        return () => {
-            if (bottom) {
-                observer.unobserve(bottom);
-            }
-        };
-    }, [bottom]);
-
-    // --------------------------------------------------
+    const onSearchBarTextChange = (event) => {
+        setSearchQuery(event.target.value);
+    };
 
     const renderRow = () => {
         return stockSymbols.map((stonk, index) =>
@@ -106,18 +99,33 @@ function StockList(props) {
                     Stonk List
                 </div>
                 :
-                <div className={classes.list}>
-                    <List
-                        component="ul"
-                        subheader={
-                            <ListSubheader component="div">
-                                Stonk List
-                            </ListSubheader>
-                        }
-                    >
-                        {renderRow()}
-                    </List>
-                    <div ref={setBottom}>loading...</div>
+                <div>
+                    <TextField className={classes.searchBar} 
+                        label="Stonk Search" 
+                        variant="outlined" 
+                        onChange={onSearchBarTextChange}
+                    />
+                    {isNoResults && <div className={classes.noSearchResults}>No Results!</div>}
+                    <div className={classes.buttonGroup}>                        
+                        <Button 
+                            variant="contained"
+                            disabled={page === 0}
+                            onClick={() => setPage(--page)}
+                        >Prev</Button>
+                        <Button 
+                            variant="contained"
+                            disabled={stockSymbols.length < 50}
+                            onClick={() => setPage(++page)}
+                        >Next</Button>
+                    </div>
+                    <div>
+                        <List
+                            className={classes.list}
+                            component="ul"
+                        >
+                            {renderRow()}
+                        </List>
+                    </div>
                 </div>
             }
         </Paper>
