@@ -62,7 +62,6 @@ function StockList(props) {
         const stockSymbols = await StockSymbolsService.getStockSymbols(page, searchQuery);
         setLoading(false);
         if (stockSymbols.length > 0) {
-            // setStockSymbols([]);
             setStockSymbols(stockSymbols);   
             setIsNoResults(false);             
         } else {

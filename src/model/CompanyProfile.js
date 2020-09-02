@@ -18,6 +18,9 @@ export default class CompanyProfile {
     }
 
     static _convertMarketCap = (marketCap) => {
+        if (!!!marketCap || marketCap === 0) {
+            return undefined;
+        }
         const zeroes = Math.floor(Math.log10(marketCap));
         if (zeroes > 5) { // at least 1000 M
             marketCap = `${(marketCap/1000000).toFixed(2)}T`;
@@ -30,6 +33,9 @@ export default class CompanyProfile {
     };
 
     static _convertShareOutstanding = (shareOutstanding) => {
+        if (!!!shareOutstanding || shareOutstanding === 0) {
+            return undefined;
+        }
         return shareOutstanding.toFixed(2);
     };
 
