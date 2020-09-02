@@ -42,7 +42,12 @@ function App(props) {
                 <Grid item>
                   <NewsFeedList />
                 </Grid>
-              }                        
+              }        
+              {currentScreenIndex === 2 &&
+                <Grid item>
+
+                </Grid>
+              }                
             </Grid>
           </Grid>
         </Grid>

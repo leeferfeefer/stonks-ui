@@ -15,8 +15,9 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import ShowChart from '@material-ui/icons/ShowChart';
 import Announcement from '@material-ui/icons/Announcement';
+import Visibility from '@material-ui/icons/Visibility';
+import ShowChart from '@material-ui/icons/ShowChart';
 import { connect } from "react-redux";
 import {updateCurrentScreenIndex} from "../redux/actions/currentScreenActions";
 
@@ -103,6 +104,19 @@ function StonksDrawer(props) {
         updateCurrentScreenIndex(index);
     };
 
+    const showIcon = (index) => {
+        switch(index) {
+            case 0:
+                return <Visibility/>;
+            case 1:
+                return <Announcement/>;
+            case 2:
+                return <ShowChart/>;
+            default:
+                break;
+        }
+    }
+
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -149,9 +163,9 @@ function StonksDrawer(props) {
                 </div>
                 <Divider />
                 <List>
-                    {['Stonk List', 'News'].map((text, index) => (
+                    {['Stonk List', 'News', 'Graph'].map((text, index) => (
                         <ListItem button key={text} onClick={() => drawerItemClicked(index)}>
-                            <ListItemIcon>{index === 0 ? <ShowChart /> : <Announcement />}</ListItemIcon>
+                            <ListItemIcon>{showIcon(index)}</ListItemIcon>
                             <ListItemText primary={text} />
                         </ListItem>
                     ))}
