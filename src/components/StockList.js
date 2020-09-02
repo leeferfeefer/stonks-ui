@@ -64,7 +64,7 @@ function StockList(props) {
         if (stockSymbols.length > 0) {
             // setStockSymbols([]);
             setStockSymbols(stockSymbols);   
-            setIsNoResults(false);            
+            setIsNoResults(false);             
         } else {
             setIsNoResults(true);
         }    
