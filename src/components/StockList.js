@@ -11,7 +11,6 @@ import StockSymbolsService from "../service/StockSymbols.service";
 import CircularProgress from '@material-ui/core/CircularProgress';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import {containsObjectWithFieldNameValue} from '../utils/ObjectUtils';
 
 const useStyles = makeStyles((theme) => ({
     listLabel: {
@@ -51,29 +50,30 @@ const useStyles = makeStyles((theme) => ({
 function StockList(props) {
     const classes = useStyles();
     const {savedStonks, saveStonk, deleteStonk} = props;
-    let [stockSymbols, setStockSymbols] = useState([]);
+    const [stockSymbols, setStockSymbols] = useState([]);
     const [loading, setLoading] = useState(true);
-    let [page, setPage] = useState(0);
+    const [page, setPage] = useState(0);
     const [searchQuery, setSearchQuery] = useState('');
     const [isNoResults, setIsNoResults] = useState(false);
 
+
+    const getStockSymbols = async () => {
+        setLoading(true);
+        const stockSymbols = await StockSymbolsService.getStockSymbols(page, searchQuery);
+        setLoading(false);
+        if (stockSymbols.length > 0) {
+            // setStockSymbols([]);
+            setStockSymbols(stockSymbols);   
+            setIsNoResults(false);            
+        } else {
+            setIsNoResults(true);
+        }    
+    }
+
     // runs both after the first render and after every update.
     useEffect(() => {
-        setLoading(true);
-        const getStockSymbols = async () => {
-            const stockSymbols = await StockSymbolsService.getStockSymbols(page, searchQuery);
-            setLoading(false);
-            if (stockSymbols.length > 0) {
-                setStockSymbols([]);
-                setStockSymbols(stockSymbols);   
-                setIsNoResults(false);            
-            } else {
-                setIsNoResults(true);
-            }    
-        }
         getStockSymbols();
-    }, [page, searchQuery]);
-
+    }, [page]);
 
     const onSearchBarTextChange = (event) => {
         setSearchQuery(event.target.value);
@@ -87,13 +87,17 @@ function StockList(props) {
                     stonk={stonk}
                     saveStonk={saveStonk}
                     deleteStonk={deleteStonk}
-                    isChecked={containsObjectWithFieldNameValue(savedStonks, 'symbol', stonk.symbol)}
                 />
                 <Divider />
             </React.Fragment>
         );
     };
 
+    const keyPress = (e) => {
+        if (e.keyCode === 13) { // enter
+            getStockSymbols();
+        }
+    }
 
     return (
         <Paper className={classes.paper}>
@@ -109,18 +113,19 @@ function StockList(props) {
                         variant="outlined" 
                         onChange={onSearchBarTextChange}
                         value={searchQuery}
+                        onKeyDown={keyPress}
                     />
                     {isNoResults && <div className={classes.noSearchResults}>No Results!</div>}
                     <div className={classes.buttonGroup}>                        
                         <Button 
                             variant="contained"
                             disabled={page === 0}
-                            onClick={() => setPage(--page)}
+                            onClick={() => setPage(page-1)}
                         >Prev</Button>
                         <Button 
                             variant="contained"
                             disabled={stockSymbols.length < 50}
-                            onClick={() => setPage(++page)}
+                            onClick={() => setPage(page+1)}
                         >Next</Button>
                     </div>
                     <div>
@@ -137,12 +142,6 @@ function StockList(props) {
     );
 };
 
-const mapStateToProps = state => {
-    return {
-        savedStonks: state.savedStonksReducer.savedStonks
-    }
-};
-
 const mapDispatchToProps = dispatch => {
     return {
         saveStonk: (stonk) => {
@@ -154,4 +153,4 @@ const mapDispatchToProps = dispatch => {
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(StockList);
+export default connect(null, mapDispatchToProps)(StockList);

@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
 
 function App(props) {
   const classes = useStyles();
-  const { savedStonks, currentScreenIndex } = props;
+  const {currentScreenIndex} = props;
 
   return (
     <div className={classes.root}>      
@@ -53,7 +53,6 @@ function App(props) {
 
 const mapStateToProps = state => {
   return {
-    savedStonks: state.savedStonksReducer.savedStonks,
     currentScreenIndex: state.currentScreenReducer.currentScreenIndex
   }
 };
